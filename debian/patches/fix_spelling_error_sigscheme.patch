@@ -1,0 +1,45 @@
+Description: fix spelling error sigscheme: charater character
+Author: HIGUCHI Daisuke (VDR dai) <dai@debian.org>
+Forwarded: https://github.com/uim/sigscheme/pull/1
+Applied-Upstream: 0.8.6+, https://github.com/uim/sigscheme/commit/1f8377107171eaee8fb17280c0760221fd97908f
+Last-Update: 2013-07-06
+
+diff --git a/sigscheme/NEWS b/sigscheme/NEWS
+index 0be076f..6c5357d 100644
+--- a/sigscheme/NEWS
++++ b/sigscheme/NEWS
+@@ -408,7 +408,7 @@ Overview of changes from 0.6.1 to 0.7.1
+ 
+   - [MAJOR] Add lacking or incomplete error handlings for port operations
+ 
+-  - [MAJOR] Fix incomplete singlebyte charater support
++  - [MAJOR] Fix incomplete singlebyte character support
+ 
+   - [MAJOR] Fix broken sign extention for 8-bit char on string port read
+ 
+diff --git a/sigscheme/src/format.c b/sigscheme/src/format.c
+index 9ea48e8..2b069ef 100644
+--- a/sigscheme/src/format.c
++++ b/sigscheme/src/format.c
+@@ -100,7 +100,7 @@
+ "~F\n"                                                                        \
+ "~wF   [Fixed]         the arg is a string or number which has width w and\n" \
+ "~w,dF                 d digits after the decimal\n"                          \
+-"~C    [Character]     charater arg is output by write-char\n"                \
++"~C    [Character]     character arg is output by write-char\n"                \
+ "~_    [Space]         a single space character is output\n"                  \
+ "~Y    [Yuppify]       the list arg is pretty-printed to the output\n"        \
+ "~?    [Indirection]   recursive format: next 2 args are format-string and list\n" \
+diff --git a/sigscheme/test/test-srfi48.scm b/sigscheme/test/test-srfi48.scm
+index f0da2ba..1b456a2 100644
+--- a/sigscheme/test/test-srfi48.scm
++++ b/sigscheme/test/test-srfi48.scm
+@@ -739,7 +739,7 @@ SEQ   MNEMONIC        DESCRIPTION
+ ~F
+ ~wF   [Fixed]         the arg is a string or number which has width w and
+ ~w,dF                 d digits after the decimal
+-~C    [Character]     charater arg is output by write-char
++~C    [Character]     character arg is output by write-char
+ ~_    [Space]         a single space character is output
+ ~Y    [Yuppify]       the list arg is pretty-printed to the output
+ ~?    [Indirection]   recursive format: next 2 args are format-string and list

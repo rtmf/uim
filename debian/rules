@@ -1,0 +1,113 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+
+DEB_HOST_ARCH      ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+# --disable-rpath \
+
+confflags := \
+	--libdir=/usr/lib/$(DEB_HOST_MULTIARCH) \
+	--libexecdir=/usr/lib/$(DEB_HOST_MULTIARCH)/uim \
+	--enable-static \
+	--enable-shared \
+	--enable-maintainer-mode \
+	--disable-warnings-into-error \
+	--enable-debug \
+	$(NULL)
+
+
+confflags += \
+	--with-fep \
+	--with-anthy \
+	--with-m17nlib \
+	--with-anthy-utf8 \
+	--with-x \
+	--with-gtk \
+	--with-gtk3 \
+	--with-qt4 \
+	--with-qt4-immodule \
+	--with-qt5 \
+	--with-qt5-immodule \
+	--with-expat \
+	--enable-dict \
+	--disable-gnome-applet \
+	--enable-gnome3-applet \
+	--disable-kde4-applet \
+	--enable-kde4-applet \
+	$(NULL)
+
+confflags += $(shell dpkg-buildflags --export=configure)
+
+ifneq (,$(filter $(DEB_HOST_ARCH), ia64 s390))
+confflags += UIM_SCM_CFLAGS=-fno-strict-aliasing
+endif
+
+export QT_SELECT=qt5
+
+%:
+	dh $@ --with autotools_dev,autoreconf
+
+override_dh_autoreconf:
+	dh_autoreconf $(CURDIR)/autogen.sh
+
+override_dh_auto_configure:
+	dh_auto_configure -- $(confflags)
+
+#override_dh_auto_clean:
+#	dh_auto_clean
+#	rm -f $(CURDIR)/tables/wb86.table $(CURDIR)/tables/zm.table
+#	rm -f $(CURDIR)/config.log $(CURDIR)/config.status
+
+override_dh_auto_test:
+
+override_dh_auto_install:
+	dh_auto_install -- GTK_IMMODULES=/dev/null
+
+override_dh_install:
+	install -d $(CURDIR)/debian/libuim-data/var/lib/uim
+	dh_install --sourcedir=debian/tmp
+
+override_dh_link:
+	dh_link -p libuim-data \
+		var/lib/uim/installed-modules.scm \
+		usr/share/uim/installed-modules.scm
+	dh_link -p libuim-data \
+		var/lib/uim/loader.scm \
+		usr/share/uim/loader.scm
+	for pkg in libuim8 libuim-scm0 libuim-custom2 \
+		   libuim-data libuim-plugins libuim-dev uim-dbg uim-utils \
+		   uim-gtk2.0 uim-gtk3 uim-applet-gnome \
+		   uim-dict-gtk uim-dict-gtk3 \
+		   uim-qt uim-qt5 plasma-widget-uim \
+		   uim-anthy uim-skk uim-m17nlib \
+		   uim uim-byeoru uim-latin uim-pinyin \
+		   uim-tcode uim-viqr uim-ipa-x-sampa uim-look \
+		; do \
+		rm -rf $(CURDIR)/debian/$$pkg/usr/share/doc/$$pkg; \
+		dh_link -p$$pkg \
+			usr/share/doc/uim-common \
+			usr/share/doc/$$pkg; \
+	done
+	dh_link
+
+override_dh_strip:
+	dh_strip --ddeb-migration='uim-dbg (<< 1:1.8.1-15~)'
+
+override_dh_makeshlibs:
+	dh_makeshlibs \
+		--exclude=usr/lib/$(DEB_HOST_MULTIARCH)/uim/plugin \
+		--exclude=usr/lib/kde4 \
+		--exclude=usr/lib/$(DEB_HOST_MULTIARCH)/gtk-2.0 \
+		--exclude=usr/lib/$(DEB_HOST_MULTIARCH)/gtk-3.0 \
+		$(NULL)
+
+override_dh_installchangelogs:
+	dh_installchangelogs ChangeLog

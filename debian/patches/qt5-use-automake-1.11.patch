@@ -1,0 +1,22 @@
+Description: use automake-1.11 for LOG_DRIVER unsupported Makefiles
+Author: HIGUCHI Daisuke (VDR dai) <dai@debian.org>
+Origin: vendor
+Forwarded: not-needed
+Last-Update: 2015-07-22
+
+diff --git a/autogen.sh b/autogen.sh
+index 800a983..b541baf 100755
+--- a/autogen.sh
++++ b/autogen.sh
+@@ -1,9 +1,9 @@
+ #!/bin/sh
+ 
+-aclocal -I m4 \
++aclocal-1.11 -I m4 \
+   && libtoolize --force --copy \
+   && autoheader \
+-  && automake --add-missing --foreign --copy \
++  && automake-1.11 --add-missing --foreign --copy \
+   && autoconf \
+   && intltoolize --copy --force --automake \
+   && perl -i -pe "s/^DISTFILES\b/# Makevars gets inserted here. (Don't remove this line!)\n\nDISTFILES/" po/Makefile.in.in \

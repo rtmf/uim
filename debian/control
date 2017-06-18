@@ -1,0 +1,652 @@
+Source: uim
+Section: libs
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: HIGUCHI Daisuke (VDR dai) <dai@debian.org>
+Uploaders: Nobuhiro Iwamatsu <iwamatsu@debian.org>,
+ Kiwamu Okabe <kiwamu@debian.or.jp>
+Build-Depends: debhelper (>= 9.20151219),
+	quilt,
+	autoconf,
+	automake1.11,
+	autotools-dev,
+	dh-autoreconf,
+	intltool,
+	libtool,
+	cmake,
+	librsvg2-bin,
+	libxml-perl,
+	m17n-db,
+	libanthy-dev,
+	libatk1.0-dev,
+	libedit-dev,
+	libexpat1-dev,
+	libfreetype6-dev,
+	libgcroots-dev,
+	libgtk2.0-dev (>= 2.10.1),
+	libgtk-3-dev,
+	libncurses5-dev,
+	libm17n-dev,
+	libpanel-applet-dev,
+	libpango1.0-dev,
+	libqt4-dev (>= 4:4.8.0),
+	libx11-dev,
+	libxext-dev,
+	libxft-dev,
+	kdelibs5-dev,
+	qtbase5-dev,
+	qtbase5-private-dev,
+	libqt5x11extras5-dev,
+	x11proto-core-dev
+Standards-Version: 3.9.8
+Homepage: https://github.com/uim/uim/wiki
+Vcs-Git: https://anonscm.debian.org/git/collab-maint/uim.git
+Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/uim.git
+
+Package: uim-common
+Section: utils
+Architecture: all
+Depends: ${misc:Depends}
+Replaces: uim-gtk2.0 (<< 1:1.7.0-2),
+	uim-hangul (<< 1:1.7.0-1),
+	uim-prime (<< 1:1.8.6-3),
+	uim-canna (<< 1:1.8.6-9~),
+	uim-ajax-ime (<< 1:1.8.6-10~),
+	uim-baidu-olime-jp (<< 1:1.8.6-10~),
+	uim-google-cgiapi-jp (<< 1:1.8.6-10~),
+	uim-social-ime (<< 1:1.8.6-10~),
+	uim-yahoo-jp (<< 1:1.8.6-10~)
+Breaks: uim-gtk2.0 (<< 1:1.7.0-2),
+	uim-hangul (<< 1:1.7.0-1),
+	uim-prime (<<1:1.8.6-3),
+	uim-canna (<< 1:1.8.6-9~),
+	uim-ajax-ime (<< 1:1.8.6-10~),
+	uim-baidu-olime-jp (<< 1:1.8.6-10~),
+	uim-google-cgiapi-jp (<< 1:1.8.6-10~),
+	uim-social-ime (<< 1:1.8.6-10~),
+	uim-yahoo-jp (<< 1:1.8.6-10~)
+Multi-Arch: foreign
+Description: Universal Input Method - common files
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains common files for the uim packages.
+
+Package: uim
+Section: utils
+Architecture: all
+Depends: ${misc:Depends},
+	uim-common (= ${source:Version}),
+	uim-gtk2.0 (>= ${source:Version}),
+	uim-qt (>= ${source:Version}),
+	uim-qt5 (>= ${source:Version}),
+	uim-gtk3 (>= ${source:Version}),
+	uim-xim (>= ${source:Version}),
+	uim-utils (>= ${source:Version}),
+	uim-fep (>= ${source:Version})
+Description: Universal Input Method - metapackage
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package is a dummy convenience package designed to install the basic
+ uim infrastructure.  It does not depend on any plugin packages, because
+ uim is not limited to one input method. Packages are available for
+ various input methods, including the following:
+  * Japanese
+   - uim-anthy: Anthy plugin for uim;
+   - uim-skk:   SKK plugin for uim.
+  * Chinese
+   - uim-pinyin: Pinyin input support for uim.
+  * Korean
+   - uim-byeoru: Byeoru input support for uim.
+  * Multilingual input method
+   - uim-m17n: M17n plugin for uim.
+
+Package: libuim8
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}, uim-common (>= ${source:Version})
+Replaces: libuim6
+Breaks: libuim6
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Description: Universal Input Method - uim library
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains the shared libraries for uim.
+
+Package: libuim-scm0
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}, uim-common (>= ${source:Version})
+Replaces: libuim6, libuim7 (<< 1:1.7.2-2)
+Breaks: libuim6, libuim7 (<< 1:1.7.2-2)
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Description: Universal Input Method - uim-scm API library
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains the shared library for uim-scm API.
+
+Package: libuim-custom2
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}, uim-common (>= ${source:Version})
+Replaces: libuim6, libuim7 (<< 1:1.7.2-2)
+Breaks: libuim6, libuim7 (<< 1:1.7.2-2)
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Description: Universal Input Method - uim-custom API library
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains the shared library for uim-custom API.
+
+Package: libuim-data
+Section: utils
+Architecture: all
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: ${misc:Depends}, ${shlibs:Depends}, uim-common (>= ${source:Version})
+Replaces: libuim6,
+	libuim7 (<< 1:1.7.1-2),
+	uim-common (<< 1:1.7.1-2),
+	uim-anthy (<< 1:1.8.1-3~),
+	uim-byeoru (<< 1:1.8.1-3~),
+	uim-ipa-x-sampa (<< 1:1.8.1-3~),
+	uim-latin (<< 1:1.8.1-3~),
+	uim-look (<< 1:1.8.1-3~),
+	uim-m17nlib (<< 1:1.8.1-3~),
+	uim-pinyin (<< 1:1.8.1-3~),
+	uim-skk (<< 1:1.8.1-3~),
+	uim-tcode (<< 1:1.8.1-3~),
+	uim-viqr (<< 1:1.8.1-3~),
+	uim-prime (<< 1:1.8.6-3),
+	uim-canna (<< 1:1.8.6-9~),
+	uim-ajax-ime (<< 1:1.8.6-10~),
+	uim-baidu-olime-jp (<< 1:1.8.6-10~),
+	uim-google-cgiapi-jp (<< 1:1.8.6-10~),
+	uim-social-ime (<< 1:1.8.6-10~),
+	uim-yahoo-jp (<< 1:1.8.6-10~),
+	uim-mozc (<< 1.5.1090.102-4~),
+	uim-chewing (<< 0.1.0-3~)
+Breaks: libuim6,
+	libuim7 (<< 1:1.7.1-2),
+	uim-common (<< 1:1.7.1-2),
+	uim-anthy (<< 1:1.8.1-3~),
+	uim-byeoru (<< 1:1.8.1-3~),
+	uim-ipa-x-sampa (<< 1:1.8.1-3~),
+	uim-latin (<< 1:1.8.1-3~),
+	uim-look (<< 1:1.8.1-3~),
+	uim-m17nlib (<< 1:1.8.1-3~),
+	uim-pinyin (<< 1:1.8.1-3~),
+	uim-skk (<< 1:1.8.1-3~),
+	uim-tcode (<< 1:1.8.1-3~),
+	uim-viqr (<< 1:1.8.1-3~),
+	uim-prime (<< 1:1.8.6-3),
+	uim-canna (<< 1:1.8.6-9~),
+	uim-ajax-ime (<< 1:1.8.6-10~),
+	uim-baidu-olime-jp (<< 1:1.8.6-10~),
+	uim-google-cgiapi-jp (<< 1:1.8.6-10~),
+	uim-social-ime (<< 1:1.8.6-10~),
+	uim-yahoo-jp (<< 1:1.8.6-10~),
+	uim-mozc (<< 1.5.1090.102-4~),
+	uim-chewing (<< 0.1.0-3~)
+Recommends: wordlist, im-config
+Description: Universal Input Method - data files
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains the data files for uim.
+
+Package: libuim-plugins
+Section: utils
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}, uim-common (>= ${source:Version})
+Replaces: libuim-data (<< 1:1.8.6-16~)
+Breaks: libuim-data (<< 1:1.8.6-16~)
+Multi-Arch: same
+Description: Universal Input Method - plugin files
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains the plugin files for uim.
+
+Package: libuim-dev
+Section: libdevel
+Architecture: any
+Depends: ${misc:Depends},
+	libuim8 (= ${binary:Version}),
+	libuim-custom2 (= ${binary:Version}),
+	libuim-scm0 (= ${binary:Version}),
+	uim-common (>= ${source:Version}),
+	libgcroots-dev
+Multi-Arch: same
+Description: Universal Input Method - development files
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains header files and static libraries for uim development.
+
+Package: uim-gtk2.0
+Section: x11
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	uim-common (>= ${source:Version})
+Replaces: uim-xim (<< 1:1.6.0-1)
+Breaks: uim-xim (<< 1:1.6.0-1)
+Suggests: uim-dict-gtk
+Description: Universal Input Method - GTK+2.x front end
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains an IM-module to support the use of uim on GTK+2.0
+ applications.
+
+Package: uim-gtk3
+Section: x11
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	uim-common (>= ${source:Version})
+Suggests: uim-dict-gtk3
+Description: Universal Input Method - GTK+3.x front end
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains an IM-module to support the use of uim on GTK+3.0
+ applications.
+
+Package: uim-qt
+Section: x11
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	uim-common (>= ${source:Version})
+Breaks: uim-qt3 (<< 1:1.8.5-2~)
+Replaces: uim-qt3 (<< 1:1.8.5-2~)
+Description: Universal Input Method - Qt 4.x front end
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains some graphical utilities (but not a full IM-module)
+ using Qt 4.x.
+
+Package: uim-qt5
+Section: x11
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	uim-common (>= ${source:Version})
+Description: Universal Input Method - Qt 5.x front end
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains some graphical utilities (but not a full IM-module)
+ using Qt 5.x.
+
+Package: uim-xim
+Section: x11
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-common (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	uim-utils (>= ${source:Version})
+Suggests: uim-gtk2.0 (>= 1:1.6.0-1), uim-gtk3, uim-qt, uim-qt5
+Description: Universal Input Method - XIM compatibility interface
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package provides a bridge allowing software that can only interface
+ with the X Input Method to work with uim.
+
+Package: uim-applet-gnome
+Section: gnome
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	uim-common (>= ${source:Version}),
+	uim-gtk3 (>= ${source:Version})
+Description: Universal Input Method - GNOME applet
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains a GNOME applet which can configure uim, monitor its
+ conversion mode, and so on.
+
+Package: plasma-widget-uim
+Section: kde
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	uim-common (>= ${source:Version}),
+	uim-qt (>= ${source:Version})
+Breaks: uim-applet-kde (<< 1:1.8.5-2~)
+Replaces: uim-applet-kde (<< 1:1.8.5-2~)
+Description: Universal Input Method - KDE Plasma widget
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains a KDE Plasma widget which can configure uim, monitor
+ its conversion mode, and so on.
+
+Package: uim-dict-gtk
+Section: x11
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-common (>= ${source:Version})
+Description: Universal Input Method - GTK+2.x Japanese dictionary tool
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains a GTK+2.x Japanese dictionary tool of uim.
+
+Package: uim-dict-gtk3
+Section: x11
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-common (>= ${source:Version})
+Description: Universal Input Method - GTK+3.x Japanese dictionary tool
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains a GTK+3.x Japanese dictionary tool of uim.
+
+Package: uim-fep
+Section: utils
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	uim-common (>= ${source:Version})
+Description: Universal Input Method - front end processor
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains a curses Front End Processor to support the use of
+ uim in a text terminal.
+
+Package: uim-utils
+Section: utils
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	libuim-data (>= ${source:Version}),
+	libuim-plugins (>= ${source:Version}),
+	uim-common (>= ${source:Version})
+Description: Universal Input Method - utilities
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains a shell interpreter, IPC server, etc.
+
+Package: uim-anthy
+Section: utils
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	libuim-plugins (>= ${source:Version}),
+	uim-common (>= ${source:Version}),
+	anthy
+Suggests: uim-dict-gtk | uim-dict-gtk3
+Description: Universal Input Method - Anthy plugin
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains a plugin for uim to support the use of the Japanese
+ input method Anthy.
+
+Package: uim-skk
+Section: utils
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	libuim-plugins (>= ${source:Version}),
+	uim-common (>= ${source:Version}),
+	skkdic | skkdic-extra | skkserv | dbskkd-cdb
+Description: Universal Input Method - SKK plugin
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains a plugin for uim to support the use of the Japanese
+ input method SKK.
+
+Package: uim-m17nlib
+Section: utils
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	libuim-plugins (>= ${source:Version}),
+	uim-common (>= ${source:Version})
+Description: Universal Input Method - m17nlib plugin
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains a plugin for uim to support the use of the
+ general-purpose input method M17n (for "Multilingualization").
+
+Package: uim-el
+Section: lisp
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	uim-common (>= ${source:Version}),
+	emacs24 | xemacs21-mule | xemacs21-mule-canna-wnn | emacsen
+Description: Universal Input Method - Emacs front end
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains an Emacs front end for uim.
+
+Package: uim-byeoru
+Section: utils
+Architecture: all
+Depends: ${misc:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	libuim-plugins (>= ${source:Version}),
+	uim-common (>= ${source:Version})
+Breaks: uim-hangul (<< 1:1.8.5-2~)
+Replaces: uim-hangul (<< 1:1.8.5-2~)
+Description: Universal Input Method - byeoru hangul input support
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains a plugin for uim to support the use of the Byeoru input
+ module for hangul.
+
+Package: uim-latin
+Section: utils
+Architecture: all
+Depends: ${misc:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	libuim-plugins (>= ${source:Version}),
+	uim-common (>= ${source:Version})
+Description: Universal Input Method - Latin script input support
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains a plugin for uim to support the use of the (Emacs)
+ Latin input method, which provides composing sequences for accented and
+ otherwise modified Roman-alphabet letters.
+
+Package: uim-pinyin
+Section: utils
+Architecture: all
+Depends: ${misc:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	libuim-plugins (>= ${source:Version}),
+	uim-common (>= ${source:Version})
+Description: Universal Input Method - pinyin input support
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package provides uim support for the (Traditional and Simplified)
+ Chinese input methods py, pyunihan, and pinyin-big5.
+
+Package: uim-tcode
+Section: utils
+Architecture: all
+Depends: ${misc:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	libuim-plugins (>= ${source:Version}),
+	uim-common (>= ${source:Version}),
+	uim-skk (>= ${source:Version}),
+	t-code-common
+Description: Universal Input Method - T-Code input support
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package provides uim support for TUT-Code (or "T-Code"), a Japanese
+ input method mapping pairs of alphanumeric codes to individual kanji - see
+ http://openlab.jp/tcode/ (in Japanese).
+
+Package: uim-viqr
+Section: utils
+Architecture: all
+Depends: ${misc:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	libuim-plugins (>= ${source:Version}),
+	uim-common (>= ${source:Version})
+Description: Universal Input Method - Vietnamese Quoted-Readable support
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package provides uim support for VIQR (Vietnamese Quoted-Readable)
+ input. VIQR is a mnemonic encoding of Vietnamese characters into US ASCII
+ for use on 7-bit systems - see RFC1456.
+
+Package: uim-ipa-x-sampa
+Section: utils
+Architecture: all
+Depends: ${misc:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	libuim-plugins (>= ${source:Version}),
+	uim-common (>= ${source:Version})
+Description: Universal Input Method - X-SAMPA IPA input support
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package provides uim support for the International Phonetic Alphabet,
+ using the 7-bit extended-SAMPA system - see
+ http://www.phon.ucl.ac.uk/home/sampa/x-sampa.htm
+
+Package: uim-look
+Section: utils
+Architecture: all
+Depends: ${misc:Depends},
+	uim-utils (>= ${source:Version}),
+	libuim-data (>= ${source:Version}),
+	libuim-plugins (>= ${source:Version}),
+	uim-common (>= ${source:Version})
+Breaks: uim-common (<= 1:1.6.1-2)
+Replaces: uim-common (<= 1:1.6.1-2)
+Recommends: wordlist
+Description: Universal Input Method - Dictionary-based completion input support
+ Uim is an input method module library which supports various scripts and can
+ act as a front end for a range of input methods, including Anthy, Canna,
+ PRIME, or SKK (for Japanese), Pinyin (for Chinese), Byeoru (for Korean), and
+ M17n (for many other languages). Most of its functions are implemented in
+ Scheme, so it's very simple and flexible.
+ .
+ This package contains Dictionary-based completion input style for uim.

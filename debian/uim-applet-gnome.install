@@ -1,0 +1,3 @@
+usr/lib/*/uim/libuim-toolbar-applet-gnome3.so
+usr/share/gnome-panel/applets/UimApplet.panel-applet
+usr/share/uim/ui/uim-applet-menu.xml

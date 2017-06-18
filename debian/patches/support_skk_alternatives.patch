@@ -1,0 +1,18 @@
+Description: Patch for supporting alternatives of /usr/share/skk/SKK-JISYO.
+Author: Kiwamu Okabe <kiwamu@debian.or.jp>
+Origin: vendor
+Forwarded: not-needed
+Last-Update: 2009-11-24
+
+diff -urNad uim-1.5.7~/scm/skk-custom.scm uim-1.5.7/scm/skk-custom.scm
+--- uim-1.5.7~/scm/skk-custom.scm	2009-01-21 11:16:35.000000000 +0900
++++ uim-1.5.7/scm/skk-custom.scm	2009-11-24 12:05:08.000000000 +0900
+@@ -387,7 +387,7 @@
+ 	   skk-use-skkserv?))
+ 
+ (define-custom 'skk-dic-file-name (string-append (sys-datadir)
+-						 "/skk/SKK-JISYO.L")
++						 "/skk/SKK-JISYO")
+   '(skk-dict dict-files)
+   '(pathname regular-file)
+   (N_ "System dictionary file")

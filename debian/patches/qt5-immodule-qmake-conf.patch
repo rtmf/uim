@@ -1,0 +1,12 @@
+Description: Re-add qmake required file.
+Author: HIGUCHI Daisuke (VDR dai) <dai@debian.org>
+Origin: vendor
+Forwarded: not-needed
+Last-Update: 2015-07-16
+Comment: related, https://github.com/uim/uim/commit/465cf53f5c5b326c6422b2e93290cc659928f620
+
+diff --git a/qt5/immodule/.qmake.conf b/qt5/immodule/.qmake.conf
+--- a/.qmake.conf	1970-01-01 09:00:00.000000000 +0900
++++ b/.qmake.conf	2015-07-16 21:45:38.722154894 +0900
+@@ -0,0 +1 @@
++#

@@ -1,0 +1,8 @@
+usr/lib/*/uim/plugin/libuim-skk.so
+usr/share/uim/pixmaps/skk.png
+usr/share/uim/pixmaps/skk_dark_background.png
+usr/share/uim/skk.scm
+usr/share/uim/skk-custom.scm
+usr/share/uim/skk-dialog.scm
+usr/share/uim/skk-editor.scm
+usr/share/uim/skk-key-custom.scm

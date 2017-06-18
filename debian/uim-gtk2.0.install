@@ -1,0 +1,10 @@
+usr/lib/*/gtk-2.0/*/immodules/im-uim.so
+usr/lib/*/uim/uim-candwin-gtk
+usr/lib/*/uim/uim-candwin-horizontal-gtk
+usr/lib/*/uim/uim-candwin-tbl-gtk
+usr/bin/uim-toolbar-gtk
+usr/bin/uim-toolbar-gtk-systray
+usr/bin/uim-im-switcher-gtk
+usr/bin/uim-pref-gtk
+usr/bin/uim-input-pad-ja
+usr/share/applications/uim.desktop

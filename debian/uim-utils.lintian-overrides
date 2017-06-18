@@ -1,0 +1,3 @@
+uim-utils: binary-without-manpage usr/bin/uim-module-manager
+uim-utils: binary-without-manpage usr/bin/uim-sh
+uim-utils: binary-without-manpage usr/bin/uim-help

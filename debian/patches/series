@@ -1,0 +1,8 @@
+support_skk_alternatives.patch
+pass_cppflags_to_cmake_cxx_flags.patch
+fix_spelling_error_sigscheme.patch
+qt5-immodule-qmake-conf.patch
+qt5-qt4-coexist.patch
+qt5-disable-debug-flag.patch
+qt5-use-automake-1.11.patch
+panel_applet_inprocess.patch

@@ -1,0 +1,6 @@
+usr/bin/uim-pref-qt4
+usr/bin/uim-im-switcher-qt4
+usr/bin/uim-chardict-qt4
+usr/bin/uim-toolbar-qt4
+usr/lib/*/uim/uim-candwin-qt4
+usr/lib/*/qt4/plugins/inputmethods/libuiminputcontextplugin.so

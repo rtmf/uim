@@ -1,0 +1,5 @@
+usr/bin/uim-m17nlib-relink-icons
+usr/lib/*/uim/plugin/libuim-m17nlib.so
+usr/share/uim/m17nlib.scm
+usr/share/uim/m17nlib-custom.scm
+usr/share/uim/pixmaps/m17n-*.png

@@ -1,0 +1,19 @@
+Description: disable debug flag
+Author: HIGUCHI Daisuke (VDR dai) <dai@debian.org>
+Origin: vendor
+Forwarded: not-needed
+Last-Update: 2015-07-17
+
+diff --git a/qt5/immodule/quimplatforminputcontext.cpp b/qt5/immodule/quimplatforminputcontext.cpp
+index af4c397..1a48ece 100644
+--- a/qt5/immodule/quimplatforminputcontext.cpp
++++ b/qt5/immodule/quimplatforminputcontext.cpp
+@@ -61,7 +61,7 @@ QUimHelperManager *QUimPlatformInputContext::m_helperManager = 0;
+ 
+ static int unicodeToUKey(ushort c);
+ 
+-#define ENABLE_DEBUG
++// #define ENABLE_DEBUG
+ 
+ QUimPlatformInputContext::QUimPlatformInputContext(const char *imname)
+ : candwinIsActive(false), m_isAnimating(false), m_uc(0)
